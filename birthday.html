@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday, Lahari 🎉</title>
+<style>
+  :root{
+    --bg:#071226;
+    --card:#0f1724;
+    --accent:#ff7ab6;
+    --accent-2:#ffd166;
+    --text:#eef2ff;
+  }
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: radial-gradient(circle at 10% 10%, #10203a 0%, var(--bg) 40%, #02030a 100%);
+    color:var(--text);
+    display:flex;align-items:center;justify-content:center;padding:24px;
+    overflow:hidden;
+  }
+  .stage{
+    width:100%;max-width:980px;height:720px;border-radius:18px;position:relative;overflow:hidden;padding:30px;box-sizing:border-box;
+    border:1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+    box-shadow:0 10px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  header{display:flex;align-items:center;gap:12px;}
+  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;font-size:24px;box-shadow:0 6px 20px rgba(255,122,182,0.12);}
+  .title{font-size:20px;font-weight:600;}
+  .subtitle{font-size:13px;color:rgba(255,255,255,0.6);margin-top:4px;}
+  .balloon{position:absolute;bottom:-120px;width:90px;height:120px;border-radius:60%;transform-origin:center bottom;opacity:0.95;animation: rise linear infinite, sway ease-in-out infinite;}
+  .balloon:after{content:"";position:absolute;left:50%;bottom:-18px;width:2px;height:36px;background:rgba(255,255,255,0.06);transform:translateX(-50%);}
+  @keyframes rise{ from { transform: translateY(0) } to { transform: translateY(-110vh) } }
+  @keyframes sway{ 0%{ transform: translateX(0) rotate(-4deg) } 50%{ transform: translateX(12px) rotate(4deg) } 100%{ transform: translateX(0) rotate(-4deg) } }
+
+  .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84%;max-width:760px;text-align:center;padding:18px;pointer-events:none;}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));padding:22px;border-radius:14px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.04);pointer-events:auto;}
+  .greeting{font-size:34px;font-weight:700;letter-spacing:-0.02em;margin:6px 0;display:inline-block;}
+  .typewriter{ display:inline-block; border-right:2px solid rgba(255,255,255,0.12); padding-right:6px; animation:blink 1s steps(2) infinite;}
+  @keyframes blink{50%{border-color:transparent;}}
+  .message{color:rgba(255,255,255,0.86);margin-top:12px;font-size:16px;line-height:1.45;text-align:center;white-space:pre-line}
+  .cake-wrap{margin:20px auto 6px;display:flex;align-items:center;flex-direction:column;gap:12px}
+  .cake{width:220px;height:120px;background:linear-gradient(180deg,#ffd7e8,#ff7ab6);border-radius:14px 14px 12px 12px;position:relative;padding-top:18px;box-shadow:0 10px 30px rgba(255,122,182,0.12)}
+  .cake-layer{width:86%;height:40%;background:linear-gradient(180deg,#fff2ef,#ffdde6);margin:0 auto;border-radius:10px;position:relative;top:18px;box-shadow: inset 0 6px 12px rgba(0,0,0,0.03);}
+  .candles{position:absolute;left:50%;top:6px;transform:translateX(-50%);display:flex;gap:10px;}
+  .candle{width:8px;height:28px;background:#fff;border-radius:2px;position:relative;display:block;}
+  .flame{position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:12px;height:18px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(180deg,#ffd166,#ff7ab6);filter:drop-shadow(0 4px 6px rgba(255,122,182,0.2));animation:flicker 0.28s infinite alternate;}
+  @keyframes flicker{ from{transform:translateX(-50%) scale(1);opacity:1} to{transform:translateX(-50%) scale(0.86);opacity:0.85} }
+
+  .controls{display:flex;gap:12px;justify-content:center;margin-top:10px}
+  .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 16px;border-radius:10px;border:none;color:#111;font-weight:700;cursor:pointer;box-shadow:0 8px 20px rgba(255,122,182,0.12);pointer-events:auto;font-size:15px;}
+  .btn:active{transform:translateY(1px)}
+  .gift{width:88px;height:88px;border-radius:12px;background:linear-gradient(180deg,#fff,#eee);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#222;font-weight:700;cursor:pointer;border:6px solid rgba(255,255,255,0.06)}
+  .modal{position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:90;opacity:0;pointer-events:none;transition:all .25s;}
+  .modal.show{opacity:1;pointer-events:auto}
+  .modal-card{width:95%;max-width:760px;background:linear-gradient(180deg,#081226,#0d1b36);padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);text-align:left}
+  .modal-close{position:absolute;right:18px;top:18px;background:transparent;border:0;color:#fff;font-size:20px;cursor:pointer}
+  .footer{position:absolute;right:18px;bottom:14px;color:rgba(255,255,255,0.45);font-size:13px}
+  #confetti-canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:50;}
+  @media (max-width:640px){ .greeting{font-size:26px} .cake{width:170px;height:100px} .cake-layer{top:14px} }
+</style>
+</head>
+<body>
+  <div class="stage" aria-live="polite">
+    <canvas id="confetti-canvas"></canvas>
+    <div id="balloon-container" aria-hidden="true"></div>
+
+    <div class="center">
+      <div class="card">
+        <header>
+          <div class="logo">🌸</div>
+          <div style="text-align:left;">
+            <div class="title">Happy Birthday — Lahari</div>
+            <div class="subtitle">A little surprise made just for you 🎂</div>
+          </div>
+        </header>
+
+        <div style="margin-top:12px;">
+          <div class="greeting">Hey <span class="typewriter" id="tw">Lahari!</span></div>
+
+          <div class="message" id="small-msg">
+Happy birthday to the strongest women, where you goes brighter that glows, smiles in that eyes, couldn't hold for a while.....
+Happy birthday lahari
+          </div>
+
+          <div class="cake-wrap" role="img" aria-label="Birthday cake animation">
+            <div class="cake" id="cake">
+              <div class="candles" id="candles">
+                <div class="candle"><span class="flame"></span></div>
+                <div class="candle"><span class="flame"></span></div>
+                <div class="candle"><span class="flame"></span></div>
+              </div>
+              <div class="cake-layer"></div>
+            </div>
+
+            <div style="display:flex;gap:14px;align-items:center;justify-content:center;margin-top:6px;">
+              <button class="btn" id="play-confetti">Celebrate 🎉</button>
+              <div class="gift" id="gift" title="Open surprise" role="button" tabindex="0" aria-pressed="false">
+                <div style="font-size:28px;">🎁</div>
+                <div style="font-size:12px;margin-top:6px">Open</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Made with ♥ for Lahari — open-source surprise</div>
+  </div>
+
+  <!-- modal with message (no photo) -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="close-modal" aria-label="Close">✕</button>
+      <h2 style="margin-top:4px">Happy Birthday, Lahari! 🎂</h2>
+      <p style="color:rgba(255,255,255,0.92);font-size:15px;white-space:pre-line">
+Happy birthday to the strongest women, where you goes brighter that glows, smiles in that eyes, couldn't hold for a while.....
+Happy birthday lahari
+      </p>
+
+      <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <div style="flex:1;min-width:220px;">
+          <p style="margin:0 0 6px;color:rgba(255,255,255,0.82)">A short note (editable):</p>
+          <textarea id="personalNote" rows="5" style="width:100%;resize:vertical;border-radius:8px;padding:10px;border:none;background:#071226;color:#fff;">
+Happy birthday to the strongest women, where you goes brighter that glows, smiles in that eyes, couldn't hold for a while.....
+Happy birthday lahari
+          </textarea>
+          <div style="margin-top:8px;display:flex;gap:8px;">
+            <button class="btn" id="sendNote">Save note</button>
+            <button class="btn" id="playMusicBtn">Play music</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ---------- Typewriter greeting ---------- */
+const twText = "Lahari! 🎉";
+const twEl = document.getElementById("tw");
+let idx = 0;
+function typeWriter(){
+  if(idx <= twText.length){
+    twEl.textContent = twText.slice(0, idx);
+    idx++;
+    setTimeout(typeWriter, 120);
+  } else {
+    twEl.classList.remove('typewriter');
+  }
+}
+typeWriter();
+
+/* ---------- Balloons ---------- */
+const balloonContainer = document.getElementById('balloon-container');
+const colors = ['radial-gradient(circle,#ff8fb1,#ff7ab6)','radial-gradient(circle,#ffd166,#ffb199)','radial-gradient(circle,#7be5f5,#55c2f0)','radial-gradient(circle,#a6f7c5,#4be09b)'];
+for(let i=0;i<10;i++){
+  const b = document.createElement('div');
+  b.className = 'balloon';
+  const size = 60 + Math.floor(Math.random()*70);
+  b.style.width = size+'px';
+  b.style.height = Math.floor(size*1.25)+'px';
+  b.style.left = (5 + Math.random()*90) + '%';
+  b.style.background = colors[i % colors.length];
+  b.style.animationDuration = (14 + Math.random()*14) + 's';
+  b.style.animationDelay = (Math.random()*4)+'s';
+  b.style.zIndex = 10;
+  b.style.opacity = 0.95;
+  balloonContainer.appendChild(b);
+}
+
+/* ---------- Confetti (canvas) ---------- */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){ canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+let confettiPieces = [];
+function random(min,max){ return Math.random()*(max-min)+min; }
+function createConfetti(count=120, originX=null){
+  confettiPieces = [];
+  for(let i=0;i<count;i++){
+    confettiPieces.push({
+      x: originX !== null ? originX : canvas.width/2,
+      y: canvas.height*0.45,
+      r: random(4,9),
+      d: random(10,30),
+      color: ['#ff7ab6','#ffd166','#7be5f5','#a6f7c5'][Math.floor(Math.random()*4)],
+      tilt: random(-10,10),
+      tiltAngle: random(0,Math.PI),
+      vx: random(-8,8),
+      vy: random(-12,-4)
+    });
+  }
+}
+let confettiRunning = false;
+function updateConfetti(){
+  if(!confettiRunning) return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confettiPieces.forEach((p,i)=>{
+    p.tiltAngle += 0.12;
+    p.x += p.vx;
+    p.y += p.vy + 0.4;
+    p.vy += 0.15;
+    p.tilt = Math.sin(p.tiltAngle) * 12;
+    ctx.save();
+    ctx.translate(p.x,p.y);
+    ctx.rotate(p.tilt * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*1.6);
+    ctx.restore();
+    if(p.y > canvas.height + 40 || p.x < -60 || p.x > canvas.width + 60){
+      p.x = random(0, canvas.width);
+      p.y = -20;
+      p.vy = random(1,4);
+    }
+  });
+  requestAnimationFrame(updateConfetti);
+}
+
+/* ---------- Buttons and modal ---------- */
+document.getElementById('play-confetti').addEventListener('click', ()=>{
+  createConfetti(160);
+  confettiRunning = true;
+  updateConfetti();
+  setTimeout(()=>{ confettiRunning = false; ctx.clearRect(0,0,canvas.width,canvas.height) }, 7000);
+});
+const modal = document.getElementById('modal');
+const gift = document.getElementById('gift');
+gift.addEventListener('click', openModal);
+gift.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') openModal(); });
+function openModal(){
+  modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+  createConfetti(220, canvas.width*0.5);
+  confettiRunning = true; updateConfetti();
+  gift.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:900,iterations:3});
+}
+document.getElementById('close-modal').addEventListener('click', closeModal);
+modal.addEventListener('click',(e)=>{ if(e.target === modal) closeModal(); });
+function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); confettiRunning=false; ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+/* ---------- Save note ---------- */
+document.getElementById('sendNote').addEventListener('click', ()=>{
+  const note = document.getElementById('personalNote').value;
+  localStorage.setItem('lahari_note', note);
+  alert('Note saved locally! You can copy it or use it later.');
+});
+
+/* ---------- WEB AUDIO (in-page generated ambient music) ---------- */
+/* No external MP3 required. Starts on user gesture (button click). */
+let audioCtx = null;
+let masterGain = null;
+let isPlaying = false;
+let schedInterval = null;
+const playMusicBtn = document.getElementById('playMusicBtn');
+
+function startMusic(){
+  if(isPlaying) return;
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.value = 0.18; // gentle volume
+    masterGain.connect(audioCtx.destination);
+  }
+  isPlaying = true;
+  playMusicBtn.textContent = 'Pause music';
+
+  // simple chord/arpeggio engine
+  const baseTime = audioCtx.currentTime + 0.05;
+  const chordProgression = [
+    [60, 64, 67], // C major (MIDI numbers)
+    [57, 60, 64], // A minor
+    [55, 59, 62], // G major (inversion)
+    [53, 57, 60]  // F major (inversion)
+  ];
+  let step = 0;
+
+  function scheduleNext(){
+    if(!isPlaying) return;
+    const chord = chordProgression[step % chordProgression.length];
+    const now = audioCtx.currentTime;
+    // create a soft pad (multiple detuned oscillators)
+    chord.forEach((midi, i)=>{
+      const osc = audioCtx.createOscillator();
+      const oscGain = audioCtx.createGain();
+      const detune = (Math.random()*8 - 4) + (i * 6); // slight detune per note
+      osc.type = 'sine';
+      osc.frequency.value = 440 * Math.pow(2, (midi - 69)/12);
+      osc.detune.value = detune;
+      oscGain.gain.value = 0;
+      osc.connect(oscGain);
+      oscGain.connect(masterGain);
+
+      const t0 = now + 0.02;
+      const envAttack = 0.12;
+      const envDecay = 3.6; // long gentle decay for pad
+      oscGain.gain.cancelScheduledValues(t0);
+      oscGain.gain.setValueAtTime(0, t0);
+      oscGain.gain.linearRampToValueAtTime(0.11, t0 + envAttack);
+      oscGain.gain.exponentialRampToValueAtTime(0.0001, t0 + envDecay + 0.02);
+
+      osc.start(t0);
+      // stop after envelope
+      osc.stop(t0 + envDecay + 0.05);
+    });
+
+    // light plucky arpeggio overlay
+    for(let k=0;k<3;k++){
+      const index = (step*3 + k) % chord.length;
+      const midi = chord[index];
+      const osc = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.value = 440 * Math.pow(2, (midi - 69)/12);
+      g.gain.value = 0;
+      osc.connect(g); g.connect(masterGain);
+      const t = now + 0.05 + (k * 0.16);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.065, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
+      osc.start(t);
+      osc.stop(t + 0.36);
+    }
+
+    step++;
+  }
+
+  // schedule repeatedly (every ~1.8s)
+  scheduleNext();
+  schedInterval = setInterval(scheduleNext, 1800);
+}
+
+function stopMusic(){
+  if(!isPlaying) return;
+  isPlaying = false;
+  playMusicBtn.textContent = 'Play music';
+  if(schedInterval) { clearInterval(schedInterval); schedInterval = null; }
+  // gently fade out masterGain
+  if(masterGain){
+    const now = audioCtx.currentTime;
+    masterGain.gain.cancelScheduledValues(now);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+    masterGain.gain.linearRampToValueAtTime(0.0001, now + 0.5);
+    // keep AudioContext alive (creating/closing repeatedly can be blocked); leaving it is okay.
+  }
+}
+
+playMusicBtn.addEventListener('click', ()=>{
+  // On first user interaction with audio, resume context if suspended (some browsers require)
+  if(!audioCtx){ startMusic(); return; }
+  if(audioCtx.state === 'suspended') audioCtx.resume().then(()=>{ if(!isPlaying) startMusic(); else stopMusic(); });
+  else { if(!isPlaying) startMusic(); else stopMusic(); }
+});
+
+/* keyboard shortcut: 'c' to celebrate */
+document.addEventListener('keydown', (e) => { if(e.key.toLowerCase() === 'c') document.getElementById('play-confetti').click(); });
+
+/* load saved note into textarea (accessibility) */
+window.addEventListener('load', ()=>{
+  const saved = localStorage.getItem('lahari_note');
+  if(saved) document.getElementById('personalNote').value = saved;
+});
+</script>
+</body>
+</html>
